@@ -9,10 +9,12 @@ from demo.models import Book
 
 class Second(View):
 	def __init__(self, **kwargs):
+		books = Book.objects.all()
 		super().__init__(**kwargs)
-		self.output = f'We have {len(books)} books in our Database.'
+		self.output = ''
+		for book in books:
+			self.output += (f'We have {book.title} with ID {book.id} in our Database <br>')
 
 	def get(self, request):
 		return HttpResponse(self.output)
 
-books = Book.objects.all()
